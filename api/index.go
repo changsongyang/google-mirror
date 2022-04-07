@@ -33,7 +33,7 @@ func addNotification(text []byte) []byte {
 	if bytes.Contains(text, []byte("doctype")) {
 		var script = `<script>
 		let SIvCob = document.querySelector('#SIvCob');
-		if (SIvCob) SIvCob = document.querySelector('#SIvCob').innerHTML = '这是一个 Google 的镜像站，原理<a target=\'_blank\' href=\'https://blog.itswincer.com/posts/1352252a/\'>戳我</a>'
+		if (SIvCob) SIvCob = document.querySelector('#SIvCob').innerHTML = '这是一个 Google 的镜像站，原理<a target=\'_blank\' href=\'https://icloudnative.io/posts/use-envoy-proxy-access-google/\'>戳我</a>'
 		</script></body></html>`
 		text = bytes.ReplaceAll(text, []byte("</body></html>"), []byte(script))
 	}
