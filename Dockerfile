@@ -1,7 +1,7 @@
 FROM golang:alpine
 
 #RUN apk update
-#RUN apk add --no-cache git
+##RUN apk add --no-cache git
 
 WORKDIR /mirror
 
