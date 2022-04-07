@@ -17,6 +17,7 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY --from=builder /app/google-mirror /app/google-mirror
+COPY --from=builder /app/config.yaml /app/config.yaml
 
 EXPOSE 3000
 
