@@ -14,12 +14,25 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+    "github.com/dsnet/compress/brotli"
 )
 
 func replaceText(text []byte) []byte {
 	for _, url := range C.GetConfig().ReplacedURLs {
 		text = bytes.ReplaceAll(text,
 			[]byte(url.Old), []byte(url.New))
+	}
+	return text
+}
+
+func addNotification(text []byte) []byte {
+	if bytes.Contains(text, []byte("doctype")) {
+		var script = `<script>
+		let SIvCob = document.querySelector('#SIvCob');
+		if (SIvCob) SIvCob = document.querySelector('#SIvCob').innerHTML = '这是一个 Google 的镜像站，原理<a target=\'_blank\' href=\'https://icloudnative.io/posts/use-envoy-proxy-access-google/\'>戳我</a>'
+		</script></body></html>`
+		text = bytes.ReplaceAll(text, []byte("</body></html>"), []byte(script))
 	}
 	return text
 }
@@ -56,6 +69,10 @@ func rewriteBody(resp *http.Response) (err error) {
 		resp.Header.Del("Content-Encoding")
 		reader, _ := gzip.NewReader(resp.Body)
 		content, err = ioutil.ReadAll(reader)
+	} else if T.HasBrotli(cEncoding) {
+		resp.Header.Del("Content-Encoding")
+		reader, _ := brotli.NewReader(resp.Body, &brotli.ReaderConfig{})
+		content, err = ioutil.ReadAll(reader)
 	} else {
 		content, err = ioutil.ReadAll(resp.Body)
 	}
@@ -70,6 +87,7 @@ func rewriteBody(resp *http.Response) (err error) {
 		resp.Header.Set("Set-Cookie", removeCookie(cookie))
 	}
 
+	content = addNotification(content)
 	resp.Body = ioutil.NopCloser(bytes.NewReader(content))
 	resp.ContentLength = int64(len(content))
 	resp.Header.Set("Content-Length", strconv.Itoa(len(content)))
