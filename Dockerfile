@@ -1,15 +1,20 @@
-FROM golang:alpine
+FROM golang:alpine AS builder
 
 RUN apk update
 RUN apk add --no-cache git
 
-WORKDIR /mirror
+WORKDIR /app
 
-ADD . /mirror
+ADD . /app
 
 RUN go get github.com/dsnet/compress/brotli
-RUN CGO_ENABLED=0 go build -o /mirror/run
+RUN CGO_ENABLED=0 go build -o /app/google-mirror
+
+FROM alpine:latest
+WORKDIR /app
+
+COPY --from=builder /app/google-mirror /app/google-mirror
 
 EXPOSE 3000
 
-ENTRYPOINT ["/mirror/run"]
+CMD ["/app/google-mirror"]
