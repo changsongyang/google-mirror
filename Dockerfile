@@ -1,5 +1,8 @@
 FROM golang:alpine AS builder
 
+LABEL org.opencontainers.image.source https://github.com/yangchuansheng/google-mirror
+LABEL maintainer="disqus-php-api Docker Maintainers https://icloudnative.io"
+
 RUN apk update
 RUN apk add --no-cache git
 
