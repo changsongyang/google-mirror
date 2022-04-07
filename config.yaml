@@ -3,8 +3,8 @@ handle_cookie: True
 
 host:
   self: google1.icloudnative.io 
-  proxy: www.google.com.hk 
+  proxy: www.startpage.com 
 
 replaced_urls:
-  - old: www.google.com.hk
+  - old: www.startpage.com
     new: google1.icloudnative.io
