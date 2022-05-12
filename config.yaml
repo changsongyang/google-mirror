@@ -2,11 +2,11 @@ enable_ssl: True
 handle_cookie: True
 
 host:
-  self: mirror.nangua.now.sh
+  self: google-mirror-nangua.now.sh
   proxy: s2-us2.startpage.com
 
 replaced_urls:
   - old: www.startpage.com
     new: s2-us2.startpage.com
   - old: s2-us2.startpage.com
-    new: mirror.nangua.now.sh
+    new: google-mirror-nangua.now.sh
