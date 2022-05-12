@@ -2,7 +2,7 @@ enable_ssl: True
 handle_cookie: True
 
 host:
-  self: mirror.loerfy.now.sh
+  self: mirror.nangua.now.sh
   proxy: s2-us2.startpage.com
 
 replaced_urls:
