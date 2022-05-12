@@ -27,12 +27,12 @@ enable_ssl: True
 handle_cookie: True
 
 host:
-  self: google-mirror-carsonyang.vercel.app
+  self: google-mirror-nangua.vercel.app
   proxy: www.google.com
 
 replaced_urls:
   - old: www.google.com
-    new: google-mirror-carsonyang.vercel.app
+    new: google-mirror-nangua.vercel.app
 
 header_token_key: X-AUTH-TOKEN
 `
