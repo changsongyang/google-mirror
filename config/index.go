@@ -28,10 +28,10 @@ handle_cookie: True
 
 host:
   self: google-mirror-nangua.vercel.app
-  proxy: www.google.com
+  proxy: www.startpage.com
 
 replaced_urls:
-  - old: www.google.com
+  - old: www.startpage.com
     new: google-mirror-nangua.vercel.app
 
 header_token_key: X-AUTH-TOKEN
